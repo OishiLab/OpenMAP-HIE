@@ -54,3 +54,5 @@ python train_controlnet_bonbid.py
 ```
 
 More detail is in `README_BONBID2023.md` and `README_ControlNet.md`.
+
+The OpenMAP-HIE is a publication of The Johns Hopkins University and copyright © 2026 The Johns Hopkins University. All rights reserved.
