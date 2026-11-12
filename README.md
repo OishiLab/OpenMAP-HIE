@@ -6,7 +6,7 @@ Manuscript: [OpenMAP-HIE](https://arxiv.org/html/2610.29322v1)
 
 This code is built on Aggregated Normative Diffusion (ANDi):
 
-- Paper: [Medical Image Analysis](https://www.sciencedirect.com/science/article/pii/S1361841525004414)
+- Paper: [Unsupervised anomaly detection in medical imaging using aggregated normative diffusion](https://www.sciencedirect.com/science/article/pii/S1361841525004414)
 - Code: [AlexanderFrotscher/ANDi](https://github.com/AlexanderFrotscher/ANDi)
 
 This repository currently contains the training code. Pretrained model weights and the evaluation code will be available soon.
