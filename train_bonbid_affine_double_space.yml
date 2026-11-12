@@ -1,0 +1,45 @@
+### DDPM training on BONBID2023 — only slices in axial_slices_no_lesion
+
+run_name : DDPM-BONBID-HealthySlices-affine_double_space_nearest_neighbor
+epochs : 233
+batch_size : 8
+workers : 4
+
+# BONBID CSV (see datasets/bonbid2023.py)
+csv_path : "../data/boston/meta_config_absolute_path/BONBID2023_clinicaldata_train_no_lesion_slices_with_orig.csv"
+# CSV column with comma-separated axial slice indices WITHOUT lesion (training only)
+bonbid_slices_no_lesion_column : "axial_slices_no_lesion_affine_double_space_nearest_neighbor"
+
+# NIfTI columns used as image channels (DDPM input). Common: adc_affine only.
+dataset_channels : ["adc_affine_double_space_nearest_neighbor"]
+
+image_size : 256
+size : 256
+channels : 1  # must match len(dataset_channels)
+
+start_lr : 2.0e-5
+target_lr : 1.0e-4
+warmup_steps: 0.05
+ema_decay: 0.995
+
+horizontal_flip: 0.5
+normalize : True
+
+train_continue : False
+model :
+ema_model :
+opt :
+
+start_ckpt : 0
+save_ckpt : 4
+num_images : 3
+
+noise_steps: 1000
+beta_start: 1.0e-4
+beta_end: 0.02
+
+pyramid : False
+simplex : False
+discount : 0.8
+
+wandb_entity: pkan2-

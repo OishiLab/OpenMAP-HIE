@@ -1,0 +1,54 @@
+### ControlNet on BONBID2023 — healthy slices only; control = separate CSV columns (e.g. Z-map)
+
+run_name : ControlNet-BONBID-affine_double_space
+epochs : 200
+batch_size : 16
+workers : 4
+
+csv_path : "../data/boston/meta_config_absolute_path/BONBID2023_clinicaldata_train_no_lesion_slices_with_orig.csv"
+bonbid_slices_no_lesion_column : "axial_slices_no_lesion_affine_double_space_nearest_neighbor"
+
+# Image = ADC (or stack multiple); control = conditioning (e.g. z-map), not used as DDPM target channel
+dataset_channels : ["adc_affine_double_space_nearest_neighbor"]
+#control_columns : ["adc_orig", "zmap_orig", "zmap_soft_threshold_orig"]     #["adc_affine"]
+control_columns : ["adc_affine_double_space_nearest_neighbor"]    #["adc_affine"]
+
+image_size : 256
+size : 256
+channels : 1  # len(dataset_channels)
+
+start_lr : 1.0e-5
+target_lr : 5.0e-5
+warmup_steps: 0.05
+ema_decay: 0.995
+
+horizontal_flip: 0.5
+normalize : True
+
+train_continue : False
+controlnet_ckpt :
+controlnet_opt :
+controlnet_ema :
+
+start_ckpt : 0
+save_ckpt : 4
+num_images : 3
+
+noise_steps: 1000
+beta_start: 1.0e-4
+beta_end: 0.02
+
+pyramid : False
+simplex : False
+discount : 0.8
+
+# Train DDPM first with train_bonbid.py (train_bonbid_affine_double_space.yml).
+# Checkpoints land in models/<run_name>/{epoch}_ema_ckpt.pt. First save is epoch 4
+# (save_ckpt: 4). Point this at the EMA checkpoint you want to freeze as the base.
+pretrained_unet_path: "./models/DDPM-BONBID-HealthySlices-affine_double_space_nearest_neighbor/4_ema_ckpt.pt"
+load_base_strict: true
+
+cfg_dropout: 0.1
+cfg_scale_sample: 7.5
+
+wandb_entity: pkan2-
